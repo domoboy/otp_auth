@@ -133,6 +133,8 @@ class Register(APIView):
                     serializer = CreateUserSerializer(data=temp_data)
                     serializer.is_valid(raise_exception=True)
                     user = serializer.save()
+                    user.set_password(password)
+                    user.save()
                     old.delete()
                     return Response({
                         'status': True,
